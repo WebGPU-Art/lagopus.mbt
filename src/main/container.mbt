@@ -24,5 +24,11 @@ fn comp_container(
   params : SearchParams
 ) -> @lagopus.LagopusRenderObject!@lagopus.BuilderError {
   guard true else { raise @lagopus.BuilderError("ok") }
-  @lagopus.group([])
+  let vertexes : Array[Vertex] = [
+    { position: Quaternion::new(x=0.0), color: Color::white() },
+    { position: Quaternion::new(x=20.0), color: Color::white() },
+    { position: Quaternion::new(x=20.0, y=20.0), color: Color::white() },
+  ]
+  let data : @lagopus.ObjectData = WithPoints(vertexes)
+  @lagopus.group([@lagopus.object(data~, shader=triangle_wgsl)])
 }

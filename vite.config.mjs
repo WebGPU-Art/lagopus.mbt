@@ -8,6 +8,6 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
-    exclude: ["@triadica/lagopus"],
+    exclude: ["@webgpu-art/lagopus"],
   },
 });

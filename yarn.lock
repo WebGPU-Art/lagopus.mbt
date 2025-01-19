@@ -241,10 +241,10 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.6.tgz#628effeeae2064a1b4e79f78e81d87b7e5fc7b50"
   integrity sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==
 
-"@webgpu-art/lagopus@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@webgpu-art/lagopus/-/lagopus-0.2.0.tgz#9703b4695c74855375c7fa00dd6fc28cd147a9ba"
-  integrity sha512-BFlK7hckkY3CCjbUOAL3OpXH5RzzIhCNjodwyCxgGl4MMbfNIazvzHBP/QAIbTokRvc5GJQo+RCak2nB/WaqLw==
+"@webgpu-art/lagopus@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@webgpu-art/lagopus/-/lagopus-0.2.2.tgz#b7507c23d0ce94b82917aa634fad715eb469f2d6"
+  integrity sha512-t8iwDOzqxIh0gF43DR6uS/ko2f4qTOBqOh9ATFl1Lzs8Fk1uDch2LZ1ZL9CwOmb5htuonHi+isvNluuRoFS+3w==
   dependencies:
     "@triadica/touch-control" "^0.0.4-a1"
     ismobilejs "^1.1.1"
