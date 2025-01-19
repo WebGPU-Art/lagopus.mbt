@@ -1,0 +1,3 @@
+{
+  "import": [{ "path": "tiye/quaternion/lib", "alias": "quaternion" }]
+}

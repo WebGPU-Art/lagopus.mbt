@@ -1,0 +1,14 @@
+{
+  "name": "tiye/lagopus",
+  "version": "0.0.1",
+  "deps": {
+    "tiye/quaternion": "0.0.4",
+    "tiye/dom-ffi": "0.0.8"
+  },
+  "readme": "README.md",
+  "repository": "https://github.com/WebGPU-Art/lagopus.mbt",
+  "license": "Apache-2.0",
+  "keywords": [],
+  "description": "wrapper on Lagopus.ts",
+  "source": "src"
+}

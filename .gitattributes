@@ -1,0 +1,6 @@
+
+calcit.cirru -diff linguist-generated
+yarn.lock -diff linguist-generated
+LICENSE -diff linguist-generated
+
+src/main/shader-*.mbt -diff linguist-generated
