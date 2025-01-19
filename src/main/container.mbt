@@ -30,5 +30,5 @@ fn comp_container(
     { position: Quaternion::new(x=20.0, y=20.0), color: Color::white() },
   ]
   let data : @lagopus.ObjectData = WithPoints(vertexes)
-  @lagopus.group([@lagopus.object(data~, shader=triangle_wgsl)])
+  @lagopus.group([@lagopus.object(data~)])
 }
