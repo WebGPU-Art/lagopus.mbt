@@ -86,3 +86,16 @@ extern "js" fn JsArray::push(self : JsArray, value : JsValue) -> Unit =
 ///|
 extern "js" fn JsArray::as_value(self : JsArray) -> JsValue =
   #| (self) => self
+
+///|
+type JsFunction
+
+///|
+extern "js" fn JsFunction::from_dispatch_fn(
+  f : DispatchFnJsValue
+) -> JsFunction =
+  #| (f) => f
+
+///|
+extern "js" fn JsFunction::to_js_value(self : JsFunction) -> JsValue =
+  #| (self) => self

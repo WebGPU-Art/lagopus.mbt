@@ -4,7 +4,22 @@
 struct Store {} derive(Default)
 
 ///|
-fn dispatch() -> Unit {
+enum Action {
+  Noop
+}
+
+///|
+impl @lagopus.JsValueTrait for Action with to_value(self : Action) -> @lagopus.JsValue {
+  @lagopus.js_undefined()
+}
+
+///|
+impl @lagopus.JsValueTrait for Action with from_value(value : @lagopus.JsValue) -> Action {
+  Noop
+}
+
+///|
+fn dispatch(a : Action) -> Unit {
   match render_app?() {
     Ok(_) => ()
     Err(e) => println("\{e}")
@@ -117,7 +132,10 @@ fn read_params() -> SearchParams {
 fn render_app() -> Unit!@lagopus.BuilderError {
   let params = read_params()
   let tree = comp_container!(params)
-  @lagopus.render_lagopus_tree(tree, dispatch)
+  @lagopus.render_lagopus_tree(
+    tree,
+    @lagopus.DispatchFn::from(dispatch).to_js_func(),
+  )
   @lagopus.paint_lagopus_tree()
 }
 

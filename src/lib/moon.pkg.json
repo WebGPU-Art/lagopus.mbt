@@ -1,3 +1,6 @@
 {
-  "import": [{ "path": "tiye/quaternion/lib", "alias": "quaternion" }]
+  "import": [
+    { "path": "tiye/quaternion/lib", "alias": "quaternion" },
+    { "path": "tiye/dom-ffi/lib", "alias": "dom_ffi" }
+  ]
 }

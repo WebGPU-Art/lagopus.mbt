@@ -66,3 +66,7 @@ pub extern "js" fn log_js_value(value : JsValue) -> Unit =
 ///|
 pub extern "js" fn math_random(n : Float) -> Float =
   #| (n) => Math.random() * n
+
+///|
+extern "js" fn lagopus_comp_button(options : JsValue) -> LagopusRenderObject =
+  #| (options) => Lagopus.compButton(options)

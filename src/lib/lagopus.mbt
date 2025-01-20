@@ -11,7 +11,7 @@ pub extern "js" fn paint_lagopus_tree() -> Unit =
 ///|
 pub extern "js" fn render_lagopus_tree(
   el : LagopusRenderObject,
-  dispatch : () -> Unit
+  dispatch : DispatchFnJsValue
 ) -> Unit =
   #| (el, dispatch) => Lagopus.renderLagopusTree(el, dispatch)
 

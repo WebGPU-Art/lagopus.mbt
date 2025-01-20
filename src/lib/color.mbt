@@ -71,3 +71,13 @@ pub fn Color::orange(a? : Float) -> Color {
 pub fn Color::blue_brigher(a? : Float) -> Color {
   Color::new(r=0.5, g=0.5, b=1.0, a=a.or(1))
 }
+
+///|
+pub fn Color::to_js_value(self : Color) -> JsValue {
+  JsObject::new()
+  ..set("r", JsValue::from_number(self.r))
+  ..set("g", JsValue::from_number(self.g))
+  ..set("b", JsValue::from_number(self.b))
+  ..set("a", JsValue::from_number(self.a))
+  .to_value()
+}
