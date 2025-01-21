@@ -30,5 +30,13 @@ fn comp_container(
     { position: Quaternion::new(x=20.0, y=20.0), color: Color::white() },
   ]
   let data : @lagopus.ObjectData = WithPoints(vertexes)
-  @lagopus.group([@lagopus.object(data~)])
+  @lagopus.group([
+    @lagopus.object(data~),
+    @lagopus.comp_button!(position=@lagopus.V3::make(x=40.0, y=0.0, z=0.0), on_click=fn(
+      _event,
+      _dispatch : @lagopus.DispatchFn[Action]
+    ) -> Unit {
+      println("Button clicked")
+    }),
+  ])
 }

@@ -33,8 +33,8 @@ pub extern "js" fn initialize_canvas_textures() -> Unit =
   #| () => Lagopus.initializeCanvasTextures()
 
 ///|
-pub extern "js" fn setup_mouse_events() -> Unit =
-  #| () => Lagopus.setupMouseEvents()
+pub extern "js" fn setup_mouse_events(canvas : Element) -> Unit =
+  #| (canvas) => Lagopus.setupMouseEvents(canvas)
 
 ///|
 /// Sets up gamepad input handling for WebGPU rendering. Initializes event

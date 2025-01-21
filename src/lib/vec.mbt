@@ -49,11 +49,11 @@ pub fn V3::cross(self : V3, other : V3) -> V3 {
   )
 }
 
-///|
+///| turns into Array
 pub fn V3::to_js_value(self : V3) -> JsValue {
-  JsObject::new()
-  ..set("x", JsValue::from_number(self.x))
-  ..set("y", JsValue::from_number(self.y))
-  ..set("z", JsValue::from_number(self.z))
+  JsArray::new()
+  ..push(JsValue::from_number(self.x))
+  ..push(JsValue::from_number(self.y))
+  ..push(JsValue::from_number(self.z))
   .to_value()
 }

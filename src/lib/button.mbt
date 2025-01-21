@@ -11,7 +11,7 @@ pub fn comp_button[Action : JsValueTrait](
   options.set("size", JsValue::from_number(size.or(20)))
   options.set(
     "color",
-    color.or(Color::new(r=1.0, g=1.0, b=1.0, a=1.0)).to_js_value(),
+    color.or(Color::new(r=1.0, g=0, b=1.0, a=1.0)).to_js_value(),
   )
   options.set(
     "on_click",

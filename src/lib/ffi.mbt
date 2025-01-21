@@ -69,4 +69,7 @@ pub extern "js" fn math_random(n : Float) -> Float =
 
 ///|
 extern "js" fn lagopus_comp_button(options : JsValue) -> LagopusRenderObject =
-  #| (options) => Lagopus.compButton(options)
+  #| (options) => {
+  #|   console.log(options);
+  #|   return Lagopus.compButton(options, options.on_click)
+  #| }
