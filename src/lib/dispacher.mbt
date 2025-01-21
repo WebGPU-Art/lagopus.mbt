@@ -76,3 +76,63 @@ extern "js" fn MouseHandlerJsValue::to_js_value(
   self : MouseHandlerJsValue
 ) -> JsValue =
   #| (self) => self
+
+///|
+type SlideHandler[Action] (V2, DispatchFn[Action]) -> Unit
+
+///|
+type SlideHandlerJsValue (JsValue, DispatchFnJsValue) -> Unit
+
+///|
+fn SlideHandler::from[Action](
+  f : (V2, DispatchFn[Action]) -> Unit
+) -> SlideHandler[Action] {
+  SlideHandler(f)
+}
+
+///|
+fn SlideHandler::to_js_func[Action : JsValueTrait](
+  self : SlideHandler[Action]
+) -> SlideHandlerJsValue {
+  fn(v : JsValue, op : DispatchFnJsValue) {
+    let f = self._
+    f(V2::from_js_value(v), DispatchFn::from_func(op))
+  }
+}
+
+///|
+extern "js" fn SlideHandlerJsValue::to_js_value(
+  self : SlideHandlerJsValue
+) -> JsValue =
+  #| (self) => self
+
+// drag
+
+///|
+type DragHandler[Action] (V3, DispatchFn[Action]) -> Unit
+
+///|
+type DragHandlerJsValue (JsValue, DispatchFnJsValue) -> Unit
+
+///|
+fn DragHandler::from[Action](
+  f : (V3, DispatchFn[Action]) -> Unit
+) -> DragHandler[Action] {
+  DragHandler(f)
+}
+
+///|
+fn DragHandler::to_js_func[Action : JsValueTrait](
+  self : DragHandler[Action]
+) -> DragHandlerJsValue {
+  fn(v : JsValue, op : DispatchFnJsValue) {
+    let f = self._
+    f(V3::from_js_value(v), DispatchFn::from_func(op))
+  }
+}
+
+///|
+extern "js" fn DragHandlerJsValue::to_js_value(
+  self : DragHandlerJsValue
+) -> JsValue =
+  #| (self) => self

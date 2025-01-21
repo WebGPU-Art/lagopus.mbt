@@ -353,17 +353,6 @@ pub fn object(
 ///
 /// Returns a new `LagopusRenderObject` that represents the group of render
 /// objects.
-///
-/// Example:
-///
-/// ```moonbit
-/// test "group" {
-///   let triangle = @lagopus.object(data=ObjectData::WithPoints([]))
-///   let circle = @lagopus.object(data=ObjectData::WithPoints([]))
-///   let scene = @lagopus.group([triangle, circle])
-///   inspect!(scene, content="[object Object]")
-/// }
-/// ```
 pub fn group(children : Array[LagopusRenderObject]) -> LagopusRenderObject {
   let arr = JsArray::new()
   for child in children {
@@ -371,3 +360,6 @@ pub fn group(children : Array[LagopusRenderObject]) -> LagopusRenderObject {
   }
   lagopus_group(arr)
 }
+
+///|
+pub let none : LagopusRenderObject = group([])
