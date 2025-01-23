@@ -49,6 +49,11 @@ pub fn V3::cross(self : V3, other : V3) -> V3 {
   )
 }
 
+///|
+pub fn V3::to_array(self : V3) -> Array[Float] {
+  [self.x, self.y, self.z]
+}
+
 ///| turns into Array
 pub fn V3::to_js_value(self : V3) -> JsValue {
   JsArray::new()
@@ -66,6 +71,14 @@ pub fn V3::from_js_value(value : JsValue) -> V3 {
     arr.get(1).to_number(),
     arr.get(2).to_number(),
   )
+}
+
+///|
+pub fn V3::from_quaternion(q : @quaternion.Quaternion) -> V3 {
+  let x = q.x
+  let y = q.y
+  let z = q.z
+  V3::new(x, y, z)
 }
 
 // V2

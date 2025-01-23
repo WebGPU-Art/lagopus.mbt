@@ -329,10 +329,14 @@ pub fn object(
     WithPoints(_) => lines_wgsl()
     WithTriangles(_) => polyline_wgsl()
   }
+  let shader = shader
+    .or(pick_shader)
+    .replace_all(old="#import lagopus::colors", new=colors_wgsl)
+    .replace_all(old="#import lagopus::perspective", new=perspective_wgsl)
   lagopus_object(
     LagopusObjectOptions::{
       label: label.or("object"),
-      shader: shader.or(pick_shader),
+      shader,
       topology: topology.or(TriangleList),
       data,
       indices: indices.or(None),

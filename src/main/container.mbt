@@ -57,5 +57,6 @@ fn comp_container(
         println("Button clicked \{dalta}")
       },
     ),
+    comp_spiral!(),
   ])
 }
