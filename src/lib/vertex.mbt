@@ -97,9 +97,12 @@ pub fn create_vertex_data(
   for i = 0; i < size - 1; i = i + 1 {
     let vertex = chunk[i]
     let vertex_next = chunk[i + 1]
-    let direction = (vertex_next.position - vertex.position)
-      .normalize()
-      .scale(width)
+    let direction = vertex_next.position - vertex.position
+    let direction_next = if i + 2 < size {
+      chunk[i + 2].position - vertex_next.position
+    } else {
+      direction
+    }
     /// 2 triangles
     data.push(PolylineVertex::{
       position: V3::from_quaternion(vertex.position),
@@ -111,7 +114,7 @@ pub fn create_vertex_data(
     data.push(PolylineVertex::{
       position: V3::from_quaternion(vertex_next.position),
       brush: 0,
-      direction: V3::from_quaternion(direction),
+      direction: V3::from_quaternion(direction_next),
       width,
       mark: 0,
     })
@@ -132,14 +135,14 @@ pub fn create_vertex_data(
     data.push(PolylineVertex::{
       position: V3::from_quaternion(vertex_next.position),
       brush: 1,
-      direction: V3::from_quaternion(direction),
+      direction: V3::from_quaternion(direction_next),
       width,
       mark: 0,
     })
     data.push(PolylineVertex::{
       position: V3::from_quaternion(vertex_next.position),
       brush: 0,
-      direction: V3::from_quaternion(direction),
+      direction: V3::from_quaternion(direction_next),
       width,
       mark: 0,
     })

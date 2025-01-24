@@ -19,26 +19,33 @@ fn vertex_main(
   @location(3) width: f32,
 ) -> VertexOut {
   var output: VertexOut;
-
-  var p1 = position;
-
-  var next = cross(direction, uniforms.forward);
-  if length(next) < 0.0001 {
-    // if parallel, use leftward
-    next = -next;
-  }
-  let brush_direction = normalize(next);
-  if brush == 1u {
-    p1 += brush_direction * width * 0.5;
-  } else {
-    p1 -= brush_direction * width * 0.5;
-  }
-
-  let p = transform_perspective(p1.xyz).point_position;
+  var ret = transform_perspective(position);
+  let p = ret.point_position;
   let scale: f32 = 0.002;
-  output.position = vec4(p[0] * scale, p[1] * scale, p[2] * scale, 1.0);
-  output.original = position;
+
+  let direction_unit = normalize(direction);
+  let p_next = transform_perspective(position + direction_unit).point_position;
+
+  let canvas_direction = normalize(p_next - p).xy;
+  let perp = vec2(canvas_direction.y, -canvas_direction.x);
+  var perspective_scale = 1. / ret.r;
+  if perspective_scale > 0. {
+    perspective_scale = min(20., perspective_scale);
+  } else if perspective_scale < 0. {
+    perspective_scale = max(-20., perspective_scale);
+  }
+  let brush_direction = vec4(perp * width * 0.5 * scale * perspective_scale, 0.0, 0.0);
+
+
+  output.position = vec4(p.xyz * scale, 1.0);
+  output.original = output.position.xyz;
   output.color = hsl(0.14, 1.0, 0.2);
+
+  if brush == 1u {
+    output.position += brush_direction;
+  } else {
+    output.position -= brush_direction;
+  }
 
   return output;
 }
