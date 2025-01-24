@@ -7,7 +7,6 @@
 
 struct VertexOut {
   @builtin(position) position: vec4f,
-  @location(0) original: vec3f,
   @location(1) color: vec3f,
 };
 
@@ -27,8 +26,8 @@ fn vertex_main(
   let p_next = transform_perspective(position + direction).point_position;
 
   let canvas_direction = normalize(p_next - p).xy;
-  let perp = vec2(canvas_direction.y, -canvas_direction.x);
-  var perspective_scale = 1. / ret.r;
+  let perp = vec2(-canvas_direction.y, canvas_direction.x);
+  var perspective_scale = 1. / ret.r * uniforms.scale;
   if perspective_scale > 0. {
     perspective_scale = min(20., perspective_scale);
   } else if perspective_scale < 0. {
@@ -38,7 +37,6 @@ fn vertex_main(
 
 
   output.position = vec4(p.xyz * scale, 1.0);
-  output.original = output.position.xyz;
   output.color = hsl(0.14, 1.0, 0.2);
 
   if brush == 1u {
