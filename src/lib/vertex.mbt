@@ -1,6 +1,6 @@
 ///|
 pub(all) struct Vertex {
-  position : @quaternion.Quaternion
+  position : V3
   color : Color
 }
 
@@ -17,12 +17,7 @@ pub fn Vertex::to_value(
   self : Vertex
 ) -> @moonbitlang/core/hashmap.T[String, Array[Float]] {
   let dict : @moonbitlang/core/hashmap.T[String, Array[Float]] = @moonbitlang/core/hashmap.new()
-  dict["position"] = [
-    self.position.x,
-    self.position.y,
-    self.position.z,
-    self.position.w,
-  ]
+  dict["position"] = [self.position.x, self.position.y, self.position.z]
   dict["color"] = [self.color.r, self.color.g, self.color.b, self.color.a]
   dict
 }
@@ -105,44 +100,44 @@ pub fn create_vertex_data(
     }
     /// 2 triangles
     data.push(PolylineVertex::{
-      position: V3::from_quaternion(vertex.position),
+      position: vertex.position,
       brush: 0,
-      direction: V3::from_quaternion(direction),
+      direction,
       width,
       mark: 0,
     })
     data.push(PolylineVertex::{
-      position: V3::from_quaternion(vertex_next.position),
+      position: vertex_next.position,
       brush: 0,
-      direction: V3::from_quaternion(direction_next),
+      direction: direction_next,
       width,
       mark: 0,
     })
     data.push(PolylineVertex::{
-      position: V3::from_quaternion(vertex.position),
+      position: vertex.position,
       brush: 1,
-      direction: V3::from_quaternion(direction),
+      direction,
       width,
       mark: 0,
     })
     data.push(PolylineVertex::{
-      position: V3::from_quaternion(vertex.position),
+      position: vertex.position,
       brush: 1,
-      direction: V3::from_quaternion(direction),
+      direction,
       width,
       mark: 0,
     })
     data.push(PolylineVertex::{
-      position: V3::from_quaternion(vertex_next.position),
+      position: vertex_next.position,
       brush: 1,
-      direction: V3::from_quaternion(direction_next),
+      direction: direction_next,
       width,
       mark: 0,
     })
     data.push(PolylineVertex::{
-      position: V3::from_quaternion(vertex_next.position),
+      position: vertex_next.position,
       brush: 0,
-      direction: V3::from_quaternion(direction_next),
+      direction: direction_next,
       width,
       mark: 0,
     })

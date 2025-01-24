@@ -9,7 +9,7 @@ fn comp_spiral() -> @lagopus.LagopusRenderObject!@lagopus.BuilderError {
     let y = @math.sin(speed * i.to_double()).to_float() * radius
     let z = @math.cos(speed * i.to_double()).to_float() * radius
     vertexes.push({
-      position: Quaternion::new(x~, y~, z~),
+      position: @lagopus.V3::make(x~, y~, z~),
       color: Color::white(),
     })
   }

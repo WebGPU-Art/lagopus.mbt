@@ -11,8 +11,8 @@ pub fn V3::new(x : Float, y : Float, z : Float) -> V3 {
 }
 
 ///|
-pub fn V3::make(x~ : Float, y~ : Float, z~ : Float) -> V3 {
-  V3::{ x, y, z }
+pub fn V3::make(x? : Float, y? : Float, z? : Float) -> V3 {
+  V3::{ x: x.or_default(), y: y.or_default(), z: z.or_default() }
 }
 
 ///|

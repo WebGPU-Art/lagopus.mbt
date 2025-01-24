@@ -22,9 +22,9 @@ fn comp_container(
 ) -> @lagopus.LagopusRenderObject!@lagopus.BuilderError {
   guard true else { raise @lagopus.BuilderError("ok") }
   let vertexes : Array[Vertex] = [
-    { position: Quaternion::new(x=0.0), color: Color::white() },
-    { position: Quaternion::new(x=20.0), color: Color::white() },
-    { position: Quaternion::new(x=20.0, y=20.0), color: Color::white() },
+    { position: @lagopus.V3::make(x=0.0), color: Color::white() },
+    { position: @lagopus.V3::make(x=20.0), color: Color::white() },
+    { position: @lagopus.V3::make(x=20.0, y=20.0), color: Color::white() },
   ]
   let data : @lagopus.ObjectData = WithPoints(vertexes)
   @lagopus.group([

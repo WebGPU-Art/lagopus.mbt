@@ -23,8 +23,8 @@ fn vertex_main(
   let p = ret.point_position;
   let scale: f32 = 0.002;
 
-  let direction_unit = normalize(direction);
-  let p_next = transform_perspective(position + direction_unit).point_position;
+  // let direction_unit = normalize(direction);
+  let p_next = transform_perspective(position + direction).point_position;
 
   let canvas_direction = normalize(p_next - p).xy;
   let perp = vec2(canvas_direction.y, -canvas_direction.x);
