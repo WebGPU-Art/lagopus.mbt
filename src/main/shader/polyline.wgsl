@@ -29,17 +29,10 @@ fn vertex_main(
   // take viewport ratio into account
   let canvas_direction_2d = vec2(line_next_2d.x, line_next_2d.y * uniforms.viewport_ratio);
   let perp = normalize(vec2(-canvas_direction_2d.y, canvas_direction_2d.x / uniforms.viewport_ratio));
-  var perspective_scale = 1. / ret.r * uniforms.scale;
-  if perspective_scale > 0. {
-    perspective_scale = min(20., perspective_scale);
-  } else if perspective_scale < 0. {
-    perspective_scale = max(-20., perspective_scale);
-  }
+  let perspective_scale = clamp(1. / ret.r * uniforms.scale, -20., 20.);
   let brush_direction = vec4(perp * width * 0.5 * scale * perspective_scale, 0.0, 0.0);
 
-
   output.position = vec4(p.xyz * scale, 1.0);
-  output.color = hsl(0.14, 1.0, 0.2);
 
   if brush == 1u {
     output.position += brush_direction;
@@ -47,6 +40,7 @@ fn vertex_main(
     output.position -= brush_direction;
   }
 
+  // output.color = hsl(0.14, 1.0, 0.2);
   return output;
 }
 
