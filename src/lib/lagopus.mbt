@@ -365,5 +365,5 @@ pub fn group(children : Array[LagopusRenderObject]) -> LagopusRenderObject {
   lagopus_group(arr)
 }
 
-///|
+///| placeholder for an empty node
 pub let none : LagopusRenderObject = group([])

@@ -7,7 +7,7 @@ pub(all) struct Vertex {
 ///|
 pub fn Vertex::attrs() -> Array[LagopusAttribute] {
   [
-    { field: "position", format: Float32x4 },
+    { field: "position", format: Float32x3 },
     { field: "color", format: Float32x4 },
   ]
 }

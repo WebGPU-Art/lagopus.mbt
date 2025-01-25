@@ -21,6 +21,11 @@ pub fn V3::to_string(self : V3) -> String {
 }
 
 ///|
+pub impl Show for V3 with output(self, logger) {
+  logger.write_string(self.to_string())
+}
+
+///|
 pub fn V3::op_add(self : V3, other : V3) -> V3 {
   V3::new(self.x + other.x, self.y + other.y, self.z + other.z)
 }
@@ -71,14 +76,6 @@ pub fn V3::from_js_value(value : JsValue) -> V3 {
     arr.get(1).to_number(),
     arr.get(2).to_number(),
   )
-}
-
-///|
-pub fn V3::from_quaternion(q : @quaternion.Quaternion) -> V3 {
-  let x = q.x
-  let y = q.y
-  let z = q.z
-  V3::new(x, y, z)
 }
 
 // V2

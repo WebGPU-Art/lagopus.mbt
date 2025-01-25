@@ -15,6 +15,6 @@ fn comp_spiral() -> @lagopus.LagopusRenderObject!@lagopus.BuilderError {
   }
   let triangles = @lagopus.create_vertex_data!(vertexes, width=8.0)
   let data : @lagopus.ObjectData = WithTriangles(triangles)
-  @lagopus.object(data~, topology=LineStrip, shader=polyline_wgsl)
+  @lagopus.object(data~, topology=TriangleList, shader=polyline_wgsl)
   // @lagopus.group([])
 }

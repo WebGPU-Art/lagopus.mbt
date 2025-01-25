@@ -2,6 +2,7 @@
 /// based on https://github.com/Triadica/triadica-space/blob/main/shaders/triadica-colors.glsl
 /// and https://www.shadertoy.com/view/XljGzV
 
+/// Converts hue, saturation, and luminance to RGB.
 fn hue2rgb(f1: f32, f2: f32, hue0: f32) -> f32 {
   var hue = hue0;
   if hue < 0.0 {
@@ -22,6 +23,7 @@ fn hue2rgb(f1: f32, f2: f32, hue0: f32) -> f32 {
   return res;
 }
 
+/// Converts hue, saturation, and luminance to RGB.
 fn hsl2rgb(hsl: vec3f) -> vec3f {
   var rgb = vec3f(0.0, 0.0, 0.0);
   if hsl.y == 0.0 {
