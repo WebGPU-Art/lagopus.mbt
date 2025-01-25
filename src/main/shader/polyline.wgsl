@@ -25,8 +25,10 @@ fn vertex_main(
   // let direction_unit = normalize(direction);
   let p_next = transform_perspective(position + direction).point_position;
 
-  let canvas_direction = normalize(p_next - p).xy;
-  let perp = vec2(-canvas_direction.y, canvas_direction.x);
+  var line_next_2d = p_next - p;
+  // take viewport ratio into account
+  let canvas_direction_2d = vec2(line_next_2d.x, line_next_2d.y * uniforms.viewport_ratio);
+  let perp = normalize(vec2(-canvas_direction_2d.y, canvas_direction_2d.x / uniforms.viewport_ratio));
   var perspective_scale = 1. / ret.r * uniforms.scale;
   if perspective_scale > 0. {
     perspective_scale = min(20., perspective_scale);

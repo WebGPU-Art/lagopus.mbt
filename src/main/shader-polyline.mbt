@@ -29,8 +29,10 @@ let polyline_wgsl : String =
   #|  // let direction_unit = normalize(direction);
   #|  let p_next = transform_perspective(position + direction).point_position;
   #|
-  #|  let canvas_direction = normalize(p_next - p).xy;
-  #|  let perp = vec2(-canvas_direction.y, canvas_direction.x);
+  #|  var line_next_2d = p_next - p;
+  #|  // take viewport ratio into account
+  #|  let canvas_direction_2d = vec2(line_next_2d.x, line_next_2d.y * uniforms.viewport_ratio);
+  #|  let perp = normalize(vec2(-canvas_direction_2d.y, canvas_direction_2d.x / uniforms.viewport_ratio));
   #|  var perspective_scale = 1. / ret.r * uniforms.scale;
   #|  if perspective_scale > 0. {
   #|    perspective_scale = min(20., perspective_scale);
@@ -42,6 +44,12 @@ let polyline_wgsl : String =
   #|
   #|  output.position = vec4(p.xyz * scale, 1.0);
   #|  output.color = hsl(0.14, 1.0, 0.2);
+  #|
+  #|  var brush_sign = brush;
+  #|  let change_sign = cross(line_next_2d, brush_direction.xyz).z < 0.0;
+  #|  // if change_sign {
+  #|  //   brush_sign = 1u - brush;
+  #|  // }
   #|
   #|  if brush == 1u {
   #|    output.position += brush_direction;
