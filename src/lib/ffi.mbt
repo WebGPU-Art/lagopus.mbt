@@ -66,3 +66,31 @@ pub extern "js" fn log_js_value(value : JsValue) -> Unit =
 ///|
 pub extern "js" fn math_random(n : Float) -> Float =
   #| (n) => Math.random() * n
+
+///|
+extern "js" fn lagopus_comp_button(options : JsValue) -> LagopusRenderObject =
+  #| (options) => {
+  #|   return Lagopus.compButton(options, options.on_click)
+  #| }
+
+///|
+extern "js" fn lagopus_comp_flat_button(
+  options : JsValue
+) -> LagopusRenderObject =
+  #| (options) => {
+  #|   return compFlatButton(options, options.on_click)
+  #| }
+
+///|
+extern "js" fn lagopus_comp_slider(options : JsValue) -> LagopusRenderObject =
+  #| (options) => {
+  #|   return Lagopus.compSlider(options, options.on_slide)
+  #| }
+
+///|
+extern "js" fn lagopus_comp_drag_point(
+  options : JsValue
+) -> LagopusRenderObject =
+  #| (options) => {
+  #|   return Lagopus.compDragPoint(options, options.on_drag)
+  #| }

@@ -5,6 +5,11 @@
       "input": "shader/triangle.wgsl",
       "output": "shader-triangle.mbt",
       "command": ":embed -i $input -o $output --name triangle_wgsl"
+    },
+    {
+      "input": "shader/polyline.wgsl",
+      "output": "shader-polyline.mbt",
+      "command": ":embed -i $input -o $output --name polyline_wgsl"
     }
   ],
   "import": [

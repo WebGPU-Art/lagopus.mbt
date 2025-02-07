@@ -1,3 +1,18 @@
 {
-  "import": [{ "path": "tiye/quaternion/lib", "alias": "quaternion" }]
+  "import": [
+    { "path": "tiye/quaternion/lib", "alias": "quaternion" },
+    { "path": "tiye/dom-ffi/lib", "alias": "dom_ffi" }
+  ],
+  "pre-build": [
+    {
+      "input": "shader/perspective.wgsl",
+      "output": "shader-perspective.mbt",
+      "command": ":embed -i $input -o $output --name perspective_wgsl"
+    },
+    {
+      "input": "shader/colors.wgsl",
+      "output": "shader-colors.mbt",
+      "command": ":embed -i $input -o $output --name colors_wgsl"
+    }
+  ]
 }

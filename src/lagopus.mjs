@@ -1,4 +1,8 @@
 import * as Lagopus from "@webgpu-art/lagopus";
+import { compFlatButton } from "@webgpu-art/lagopus/lib/comp/button";
+
+/** TODO using component from index */
+window.compFlatButton = compFlatButton;
 
 window.Lagopus = Lagopus;
 

@@ -11,7 +11,7 @@ pub extern "js" fn paint_lagopus_tree() -> Unit =
 ///|
 pub extern "js" fn render_lagopus_tree(
   el : LagopusRenderObject,
-  dispatch : () -> Unit
+  dispatch : DispatchFnJsValue
 ) -> Unit =
   #| (el, dispatch) => Lagopus.renderLagopusTree(el, dispatch)
 
@@ -33,8 +33,8 @@ pub extern "js" fn initialize_canvas_textures() -> Unit =
   #| () => Lagopus.initializeCanvasTextures()
 
 ///|
-pub extern "js" fn setup_mouse_events() -> Unit =
-  #| () => Lagopus.setupMouseEvents()
+pub extern "js" fn setup_mouse_events(canvas : Element) -> Unit =
+  #| (canvas) => Lagopus.setupMouseEvents(canvas)
 
 ///|
 /// Sets up gamepad input handling for WebGPU rendering. Initializes event
@@ -329,10 +329,14 @@ pub fn object(
     WithPoints(_) => lines_wgsl()
     WithTriangles(_) => polyline_wgsl()
   }
+  let shader = shader
+    .or(pick_shader)
+    .replace_all(old="#import lagopus::colors", new=colors_wgsl)
+    .replace_all(old="#import lagopus::perspective", new=perspective_wgsl)
   lagopus_object(
     LagopusObjectOptions::{
       label: label.or("object"),
-      shader: shader.or(pick_shader),
+      shader,
       topology: topology.or(TriangleList),
       data,
       indices: indices.or(None),
@@ -353,17 +357,6 @@ pub fn object(
 ///
 /// Returns a new `LagopusRenderObject` that represents the group of render
 /// objects.
-///
-/// Example:
-///
-/// ```moonbit
-/// test "group" {
-///   let triangle = @lagopus.object(data=ObjectData::WithPoints([]))
-///   let circle = @lagopus.object(data=ObjectData::WithPoints([]))
-///   let scene = @lagopus.group([triangle, circle])
-///   inspect!(scene, content="[object Object]")
-/// }
-/// ```
 pub fn group(children : Array[LagopusRenderObject]) -> LagopusRenderObject {
   let arr = JsArray::new()
   for child in children {
@@ -371,3 +364,6 @@ pub fn group(children : Array[LagopusRenderObject]) -> LagopusRenderObject {
   }
   lagopus_group(arr)
 }
+
+///| placeholder for an empty node
+pub let none : LagopusRenderObject = group([])

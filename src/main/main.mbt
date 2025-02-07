@@ -4,7 +4,13 @@
 struct Store {} derive(Default)
 
 ///|
-fn dispatch() -> Unit {
+let store : Store = Store::default()
+
+///|
+fn dispatch(a : Action) -> Unit {
+  match a {
+    Action::Noop => ()
+  }
   match render_app?() {
     Ok(_) => ()
     Err(e) => println("\{e}")
@@ -50,8 +56,6 @@ struct SearchParams {
   read : Bool
   ///| Whether to show coordinate axes
   show_axis : Bool
-  ///| Iteration count for recursive visualizations(0-10), only work for some tabs
-  times : Int?
 }
 
 ///|
@@ -61,27 +65,6 @@ struct SearchParams {
 /// * "tab": Determines which visualization to display
 /// * "read": Controls if data should be read
 /// * "axis": Controls the visibility of coordinate axes
-/// * "times": Controls iteration times for certain visualizations
-///
-/// Returns a `SearchParams` structure containing the parsed parameters with the
-/// following fields:
-///
-/// * `tab`: The current visualization tab, parsed from "tab" parameter
-/// * `read`: A boolean indicating whether to read data, defaults to `true`
-/// * `show_axis`: A boolean controlling axis visibility, defaults to `true`
-/// * `times`: An optional integer between 0 and 10 controlling iteration count
-///
-/// Example:
-///
-/// ```moonbit
-/// test "read_params" {
-///   // Assuming URL: "http://example.com?tab=quat-curve&read=false&axis=true&times=5"
-///   let params = read_params()
-///   inspect!(params.read, content="false")
-///   inspect!(params.show_axis, content="true")
-///   inspect!(params.times, content="Some(5)")
-/// }
-/// ```
 fn read_params() -> SearchParams {
   let location = @dom_ffi.window().location()
   let params = @dom_ffi.new_url_search_params(location.search())
@@ -96,28 +79,17 @@ fn read_params() -> SearchParams {
     "false" => false
     _ => true
   }
-  let times = match params.get("times") {
-    "0" => Some(0)
-    "1" => Some(1)
-    "2" => Some(2)
-    "3" => Some(3)
-    "4" => Some(4)
-    "5" => Some(5)
-    "6" => Some(6)
-    "7" => Some(7)
-    "8" => Some(8)
-    "9" => Some(9)
-    "10" => Some(10)
-    _ => None
-  }
-  { tab: Tab::from_string(tab), read, show_axis, times }
+  { tab: Tab::from_string(tab), read, show_axis }
 }
 
 ///|
 fn render_app() -> Unit!@lagopus.BuilderError {
   let params = read_params()
   let tree = comp_container!(params)
-  @lagopus.render_lagopus_tree(tree, dispatch)
+  @lagopus.render_lagopus_tree(
+    tree,
+    @lagopus.DispatchFn::from(dispatch).to_js_func(),
+  )
   @lagopus.paint_lagopus_tree()
 }
 
@@ -135,6 +107,7 @@ fn create_app() -> Unit {
     @lagopus.paint_lagopus_tree()
   })
   @lagopus.reset_canvas_size(canvas)
+  @lagopus.setup_mouse_events(canvas)
 
   // window.__caterfoilHandleCompilationInfo = (e, code) => {
   //   if (e.messages.length) {

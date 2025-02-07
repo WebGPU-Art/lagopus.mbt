@@ -80,9 +80,30 @@ extern "js" fn JsArray::new() -> JsArray =
   #| () => []
 
 ///|
+extern "js" fn JsArray::get(self : JsArray, index : Int) -> JsValue =
+  #| (self, index) => self[index]
+
+///|
 extern "js" fn JsArray::push(self : JsArray, value : JsValue) -> Unit =
   #| (self, value) => self.push(value)
 
 ///|
 extern "js" fn JsArray::as_value(self : JsArray) -> JsValue =
+  #| (self) => self
+
+///|
+extern "js" fn JsArray::from(value : JsValue) -> JsArray =
+  #| (value) => value
+
+///|
+type JsFunction
+
+///|
+extern "js" fn JsFunction::from_dispatch_fn(
+  f : DispatchFnJsValue
+) -> JsFunction =
+  #| (f) => f
+
+///|
+extern "js" fn JsFunction::to_js_value(self : JsFunction) -> JsValue =
   #| (self) => self
